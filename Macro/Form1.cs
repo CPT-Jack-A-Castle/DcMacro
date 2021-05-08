@@ -36,7 +36,7 @@ namespace Macro
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string builder = Properties.Resources.sct.Replace("%qwqdanchun%",textBox2.Text);
+            string builder = Properties.Resources.sct.Replace("%qwqdanchun%",textBox2.Text).Replace("%filename%", textBox3.Text);
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "qwqdanchun.sct");
             File.WriteAllText(path,builder);
             MessageBox.Show("Done.\nSct file saved on your desktop.\nUpload it to your website,and input the url below.");

